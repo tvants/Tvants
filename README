@@ -1,0 +1,6 @@
+TVants is a P2PTV application written and designed by Zhejiang University.
+Most programs on TVants are provided and shared by users, so the availability of a program depends on its popularity.
+Users can add their media source to the platform, or even set up their own media cast platform -- because it can act 
+both as a client and a server.
+
+This project is a Python client for accessing the channels in TVants network.
