@@ -1,8 +1,6 @@
 #!/usr/bin/env python
-import asyncore, socket, psyco, binascii, struct, time, threading, sys, collections, hashlib, random, optparse #, math
-import asfd, UI7
-eurosoccer = 'tvants://list.tvants.com/tvants/?k=7aac15fdc859f76e9425d0e3150a5998'
-cctv5 = 'tvants://list.tvants.com/tvants/?k=903d0c7dcab9d2718efce2b40509b8b3'
+import asyncore, socket, psyco, binascii, struct, time, threading, sys, collections, hashlib, random, optparse
+import asfd, UI
 class tvants(asyncore.dispatcher):
 	def __init__(self, dst, bindport):
 		self.dst = dst
@@ -452,9 +450,8 @@ class queen_ant():
 		self.peerlist_evt = threading.Event()
 		
 		self.tracker = tracker(('list.tvants.com', 16600), self.trackerport, self.chn_uri)
-		self.interface = UI7.ui_main(asfsrv, self)
+		self.interface = UI.ui_main(asfsrv, self)
 		self.interface.initpanes()
-		#~ self.interface.draw_all()
 	def track(self):
 		while self.running:
 			if self.tracker.status == 'registered':
@@ -539,7 +536,5 @@ if __name__ == "__main__":
 	aloop = threading.Thread(target=queen.asyncore_loop)
 	aloop.start()
 	
-	#~ v82 = open('v82.txt','w')
 	tracker_thread.join()
-	#~ v82.close()
 	sys.exit(0)
