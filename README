@@ -1,6 +1,53 @@
+Introduction
 TVants is a P2PTV application written and designed by Zhejiang University.
 Most programs on TVants are provided and shared by users, so the availability of a program depends on its popularity.
 Users can add their media source to the platform, or even set up their own media cast platform -- because it can act 
 both as a client and a server.
-
 This project is a Python client for accessing the channels in TVants network.
+
+Requirements
+1. Python 2.5.2 or higher
+2. Python Modules - asyncore, socket, psyco, binascii, struct, time, threading, sys, collections, hashlib, random, optparse,
+    curses, locale, sys, itertools, itemgetter, attrgetter, SocketServer, re
+3. Video player for ASF streams, e.g. VLC, MPlayer.
+
+Usage
+1. cd to tvants/scripts
+2. Running tvants.py without arguments will start the text-based interface and connect to the TVAnts tracker to get the
+    channel list
+3. Select the desired channel and press 'c' to connect
+4. Wait for video buffer to fill(100 chunks or more should usually be enough) before trying to play stream.
+5. Start watching with your favorite video player, e.g.
+    a) mplayer http://localhost:1688/1
+    b) vlc http://localhost:1688/1
+
+Interface commands
+
+1. General commands
+<tab> - switch between "Top Channels" and "Neighbours" panes
+<F5> - update channel list from tracker
+q - quit program
++ - increase minimum neighbours
+- - decrease minimum neighbours
+
+2. "Top Channels" commands
+<UP>, <Down> keys - move to desired channel
+c - connect to selected channel when in "Top Channels"
+
+3. "Neigbours" commands
+<UP>, <Down> keys - move to desired neighbour
+<DEL> - disconnect neighbour
+
+Commandline Options
+-v VIDEOPORT, --videoport=VIDEOPORT. TCP port (default 1688) used for http stream
+-p PEERPORT, --peerport=PEERPORT. TCP port (default 16800) used to communicate with peers
+-t TRACKERPORT, --trackerport=TRACKERPORT. TCP port (default 13800) used to communicate with tracker
+-u URI, --uri=URI, TVAnts URI, e.g. tvants://list.tvants.com/tvants/?k=d5f061678caf14562047f8b3717d8be7
+
+Video URI
+http://localhost[:VIDEOPORT]/[Buffer Position]
+Buffer Postion - position at video buffer to start playing from. Valid values: 1 to 238
+
+Known Problems
+1. Some channels have not been successfully decoded
+2. Resizing terminal window can cause program's UI to fail
